@@ -1,0 +1,336 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+     <h1>YOURDRS</h1>
+     <!-- <img src="src\assets\download (1).png" height=70 width=200px> -->
+     <mat-menu #appMenu="matMenu">
+        <button mat-menu-item>Adjuster Dashboard</button>
+        <button mat-menu-item >Office Dashboard</button>
+      </mat-menu>
+
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!-- hello -->
+ <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon" md-menu-align-target >menu</mat-icon>
+
+    </button>
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <mat-tab-group>
+    <mat-tab label="Appointments Dashboard"> </mat-tab>
+      <mat-tab label="Appointments Scheduler">
+        <div class="example-large-box mat-elevation-z4">
+            <form>
+              <div class="form-group row">
+                  <div class="form-group col-md-3">
+                      <label>Practice</label><br>
+                <input type="text" [formControl]="control" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+                            {{street}}
+                          </mat-option>
+                        </mat-autocomplete>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <label >Location</label><br>
+                  <input type="text" [formControl]="control" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+                            {{street}}
+                          </mat-option>
+                        </mat-autocomplete>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label >Provider/Physician Assistant</label>
+                     <input type="text" [formControl]="control" [matAutocomplete]="auto">
+                     <mat-autocomplete #auto="matAutocomplete">
+                       <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+                         {{street}}
+                       </mat-option>
+                     </mat-autocomplete>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label >Specialty</label><br>
+                      <input type="text" [formControl]="control" [matAutocomplete]="auto">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+                          {{street}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      </div>
+              </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label >Search From Date</label>
+                      <input type="date" name="bday">
+                  </div>
+
+                  <div class="form-group col-md-1">
+                    <input  type="checkbox" >
+                    <label>Clinical</label>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <input  type="checkbox" >
+                    <label>PT</label>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <input  type="checkbox" >
+                    <label>Dx</label>
+                  </div>
+                  <div class="form-group col-md-1">
+                      <input  type="checkbox" >
+                      <label>Concierge</label>
+                    </div>
+                  <div class="form-group col-md-2">
+                    <label >Scheduler Start Time</label>
+                    <select  class="form-control">
+                        <option value="10am">10am</option>
+                        <option value="11am">11am</option>
+                        <option value="12am">12am</option>
+                        <option value="1pm">1pm</option>
+
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label >Scheduler End Time</label>
+                    <select  class="form-control">
+                        <option value="7am">7am</option>
+                        <option value="8am">8am</option>
+                        <option value="9am">9am</option>
+                        <option value="10pm">10am</option>
+
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-2">
+
+                  <button class="btn btn-primary" (click)=" openEdit(content)">Search</button>
+                </div>
+                </div>
+
+              </form>
+
+        </div>
+    </mat-tab>
+    <a href="#" ng-click="PrivateMessage()" data-tab='one'> open click </a>
+
+
+
+    <mat-tab label="My Cases">  </mat-tab>
+  </mat-tab-group>
+  <!-- <<<------>
+  <ng-template #content let-modal>
+      <!-- <div class="model-content" style="width:max-content"> -->
+      <div class="modal-dialog modal-xl" class="modal-content">
+        <!-- <div class="modal-content"> -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-basic-title">Patient Information</h5>
+          <button type="button" class="close bg bg-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">Close</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">General Informartion</div>
+                <hr>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>First Name</label>
+                        <input formControlName="firstname" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Middle Name</label>
+                        <input formControlName="middlename" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Last Name</label>
+                        <input formControlName="lastname" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>DOB</label>
+                        <input formControlName="dob" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Gender</label>
+                        <input formControlName="gender" class="form-control" type="text" list="genders">
+                        <datalist id="genders">
+                          <option value="Select">
+                          <option value="Female">
+                          <option value="Male">
+                          <option value="Other">
+                        </datalist>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Address Information</div>
+                <hr>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>Address 1</label>
+                        <input formControlName="address1" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Address 2</label>
+                        <input formControlName="address2" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>ZIP</label>
+                        <input formControlName="zip" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>City</label>
+                        <input formControlName="city" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>State</label>
+                        <input formControlName="state" class="form-control" type="text" list="states">
+                        <datalist id="states">
+                          <option value="Select">
+                          <option value="AE">
+                          <option value="AL">
+                          <option value="AK">
+                          <option value="AS">
+                          <option value="CO">
+                          <option value="CL">
+                          <option value="IN">
+                          <option value="ID">
+                          <option value="ZN">
+                        </datalist>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Contact Information</div>
+                <hr>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>Home #</label>
+                        <input formControlName="home" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Cell #</label>
+                        <input formControlName="cell" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Work Phone #</label>
+                        <input formControlName="workphone" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="form-group col-md-4">
+                        <label>Email</label>
+                        <input formControlName="email" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Preferred Mode of Contact</label>
+                        <input formControlName="mode" class="form-control" type="text" list="modes">
+                        <datalist id="modes">
+                          <option value="Select">
+                          <option value="Email">
+                          <option value="Phone">
+                          <option value="Text">
+                        </datalist>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Other Information</div>
+                <hr>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group row">
+                      <div class="form-group col-md-6">
+                        <label>SSN</label>
+                        <input formControlName="ssn" type="text" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Preferred Language</label>
+                        <input formControlName="language" class="form-control" type="text" list="languages">
+                        <datalist id="languages">
+                          <option value="Select">
+                          <option value="Arabic">
+                          <option value="English">
+                          <option value="French">
+                          <option value="Greek">
+                          <option value="Japanese">
+                          <option value="Tamil">
+                        </datalist>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                       <p>Authorization to contact patient</p>
+                      </div> -->
+
+                      <p>Authorization to contact patient</p>
+                      <hr>
+
+                      <div class="form-group row">
+                      <div>
+                          <mat-checkbox>Email</mat-checkbox>&nbsp;&nbsp;
+                      </div>
+                      <div>
+                          <mat-checkbox>Phone</mat-checkbox>&nbsp;&nbsp;
+                      </div>
+                      <div>
+                          <mat-checkbox>Text</mat-checkbox>&nbsp;&nbsp;
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </ng-template>
+
